@@ -1,5 +1,3 @@
-# main/middleware.py
-
 from django.shortcuts import render
 
 class CustomErrorMiddleware:

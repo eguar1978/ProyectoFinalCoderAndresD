@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import JsonResponse, HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .forms import RegisterForm, CategoryForm, BrandForm, ProductForm, UserRoleForm, EditProfileForm, CommentForm
 from .models import Category, Brand, Product, CustomUser, Comment
+
 
 def home(request):
     return render(request, 'home.html')
@@ -22,13 +25,37 @@ def register(request):
         form = RegisterForm()
     return render(request, 'main/register.html', {'form': form})
 
+def login_view(request):
+    print("Método de solicitud:", request.method)  # Depuración
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        print("Datos del formulario POST:", request.POST)  # Depuración
+        if form.is_valid():
+            print("Formulario es válido")  # Depuración
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                print("Usuario autenticado:", user)  # Depuración
+                login(request, user)
+                return redirect('home')
+            else:
+                print("Error de autenticación: Usuario o contraseña incorrectos")  # Depuración
+                messages.error(request, "Usuario o contraseña incorrectos.")
+        else:
+            print("Formulario no es válido")  # Depuración
+            messages.error(request, "Usuario o contraseña incorrectos.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Redirige a una vista del perfil o donde prefieras
+            return redirect('profile') 
     else:
         form = EditProfileForm(instance=request.user)
     return render(request, 'main/edit_profile.html', {'form': form})

@@ -16,11 +16,16 @@
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
-        
     </form>
+    {% if messages %}
+        <div class="alert alert-danger mt-3" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
     <a href="{% url 'register' %}">
         <button type="submit" class="btn btn-success btn-block mt-3">Registro</button>
     </a>
-    
 </div>
 {% endblock %}
