@@ -1,3 +1,7 @@
+Link al video de Youtube donde se ve el funcionamiento de la web.
+
+https://www.youtube.com/watch?v=NsP3uFwcaDw
+
 python -m venv myenv
 
 source myenv/bin/activate  # En macOS y Linux
