@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Brands{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Marcas</h1>
+    <a href="{% url 'add_brand' %}" class="btn btn-primary mb-3">Agregar Marca</a>
+    <ul class="list-group">
+        {% for brand in brands %}
+        <li class="list-group-item">
+            <a href="{% url 'get_products' brand.id %}">{{ brand.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

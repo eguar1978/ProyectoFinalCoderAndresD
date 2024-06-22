@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage User Roles{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Administrar roles de usuario</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="user_id">Seleccionar Usuario:</label>
+            <select id="user_id" name="user_id" class="form-control">
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.username }} ({{ user.role }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="id_role">Rol:</label>
+            <select id="id_role" name="role" class="form-control">
+                {% for value, display in form.fields.role.choices %}
+                    <option value="{{ value }}" {% if form.initial.role == value %}selected{% endif %}>{{ display }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Rol</button>
+    </form>
+</div>
+{% endblock %}

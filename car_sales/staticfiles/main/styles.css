@@ -1,0 +1,49 @@
+body {
+    background-color: #d3d3d3 !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    background-color: #00747c;
+}
+
+.navbar-brand,
+.nav-link {
+    color: #CACACA !important;
+}
+
+.nav-link:hover {
+    color: #03363a !important;
+}
+
+.content {
+    flex: 1;
+    margin-bottom: 60px;  /* Ajuste para acomodar el footer */
+}
+
+footer {
+    background-color: #00747c;
+    color: #CACACA;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card {
+    min-height: 350px;
+}

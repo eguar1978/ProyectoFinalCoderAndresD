@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Categoria{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Agregar Categoria</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="id_name">Nombre de Categoria:</label>
+            <input type="text" class="form-control" id="id_name" name="name" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Agregar Categoria</button>
+    </form>
+</div>
+{% endblock %}
