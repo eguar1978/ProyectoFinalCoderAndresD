@@ -14,7 +14,7 @@ class RegisterForm(UserCreationForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if CustomUser.objects.filter(email=email).exists():
-            raise forms.ValidationError("Email is already in use.")
+            raise forms.ValidationError("Correo electrónico ya está en uso.")
         return email
     
 class CategoryForm(forms.ModelForm):
